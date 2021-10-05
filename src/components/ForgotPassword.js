@@ -16,11 +16,11 @@ function ForgotPassword() {
         try {
             setMessage('')
             setError('')
-            if(error) setMessage(`An email has been sent to ${emailRef.current.value}.`)
+            setMessage(`If the email exists, an email has been sent to ${emailRef.current.value}.`)
             setLoading(true)
             await forgotPassword(emailRef.current.value)
         } catch(err) {
-            setError(err.message)
+            return null;
         }
         setLoading(false)
     }
