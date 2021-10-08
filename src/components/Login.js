@@ -42,6 +42,7 @@ function Login() {
                             <Form.Control ref={passwordRef} type="password" required />
                         </Form.Group>
                         <Button disable={loading} className="w-100 mb-4 mt-4" type="submit">Login</Button>
+                        {/* <Button onClick={signInWithGoogle} >Sign in with Google</Button> */}
                         <div className="w-100 mt-1 mb-1 text-center">
                             <Link to="forgot-password">Forgot Password?</Link>
                         </div>

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Card, Button, Alert } from 'react-bootstrap'
 import { useAuth } from '../contexts/AuthContext'
 import { Link, useHistory } from 'react-router-dom'
+import Chat from './Chat'
 
 function Dashboard() {
     const [error, setError] = useState('')
@@ -20,7 +21,7 @@ function Dashboard() {
 
     return (
         <>
-            <Card>
+            {/* <Card>
                 <Card.Body>
                     <h2 className="text-center mb-2">Profile</h2>
                     {error && <Alert variant="danger">{error}</Alert>}
@@ -32,7 +33,8 @@ function Dashboard() {
             </Card>
             <div className="w-100 text-center mt-2">
                 <Button variant="link" onClick={handleLogout}>Log Out</Button>
-            </div>
+            </div> */}
+            <Chat />
         </>
     )
 }

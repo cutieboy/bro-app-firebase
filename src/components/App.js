@@ -9,6 +9,8 @@ import UpdateProfile from './UpdateProfile'
 import ForgotPassword from './ForgotPassword'
 import UserData from './UserData'
 
+import './styles/App.css'
+
 function App() {
   return (
     

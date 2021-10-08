@@ -20,7 +20,7 @@ function ForgotPassword() {
             setLoading(true)
             await forgotPassword(emailRef.current.value)
         } catch(err) {
-            return null;
+            return setMessage(err.message)
         }
         setLoading(false)
     }
