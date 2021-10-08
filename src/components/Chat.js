@@ -22,7 +22,7 @@ function Chat() {
     async function handleMessage(e) {
         e.preventDefault()
         if(msgFormValue === '') return
-        const {uid, photoURL} = currentUser
+        const {uid, photoURL, displayName} = currentUser
 
         try {
             setError('')
@@ -30,7 +30,8 @@ function Chat() {
                 text: msgFormValue,
                 createdAt: firebase.firestore.FieldValue.serverTimestamp(),
                 uid,
-                photoURL
+                photoURL,
+                displayName
             })
         } catch(err) {
             setError(err.message)
@@ -42,6 +43,7 @@ function Chat() {
 
     return(
         <>
+            <div>{currentUser.displayName}</div>
             <div className="message-container">
                 {messages && messages.reverse().map(msg => <ChatMessage key={msg.id} message={msg} />)}
                 <div ref={scrollBottomRef}></div>
