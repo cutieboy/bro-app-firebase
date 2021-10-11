@@ -1,5 +1,4 @@
 import React from 'react'
-import './styles/ChatMessage.css'
 import { useAuth } from '../contexts/AuthContext'
 
 function ChatMessage(props) {
@@ -7,10 +6,10 @@ function ChatMessage(props) {
     const { text, uid, createdAt, displayName } = props.message
 
     return (
-        <div className={`message ${uid === currentUser.uid ? 'message-yours': 'message-not-yours'}`}>
-            <p>{displayName}</p>
-            <p>{text}</p>
-            <p>{createdAt && createdAt.toDate().toLocaleString("en-US", {timeZone: "America/Los_Angeles"})}</p>
+        <div className="message">
+            <p className={`message-display-name ${uid === currentUser.uid ? 'message-yours': 'message-not-yours'}`}>{`${displayName}:`}</p>
+            <p className="message-text">{text}</p>
+            {/* <p className="message-time">{createdAt && createdAt.toDate().toLocaleString("en-US", {timeZone: "America/Los_Angeles"})}</p> */}
         </div>
     )
 }

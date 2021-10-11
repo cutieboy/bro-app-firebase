@@ -6,18 +6,21 @@ import firebase from 'firebase/compat/app'
 
 import ChatMessage from './ChatMessage'
 
-import './styles/Chat.css'
-
-function Chat() {
+function Chatroom(props) {
     const { currentUser } = useAuth()
-    const messagesRef = firestore.collection('messages')
-    const scrollBottomRef = useRef()
-    const query = messagesRef.orderBy('createdAt', 'desc').limit(10)
 
-    const [messages] = useCollectionData(query, {idField: 'id'})
+    //Props
+    const { chatroomId } = props
 
+    //Messages collection - firestore
+    const messageDatabase = firestore.collection('messages')
+    const messageQuery = messageDatabase.orderBy("createdAt", "desc").where("chatroomId", "==", chatroomId)
+    const [messages] = useCollectionData(messageQuery, {idField: 'id'})
+
+    //State & Ref hooks
     const [msgFormValue, setMsgFormValue] = useState('')
     const [error, setError] = useState('')
+    const scrollBottomRef = useRef()
 
     async function handleMessage(e) {
         e.preventDefault()
@@ -26,15 +29,16 @@ function Chat() {
 
         try {
             setError('')
-            messagesRef.add({
+            messageDatabase.add({
                 text: msgFormValue,
                 createdAt: firebase.firestore.FieldValue.serverTimestamp(),
                 uid,
                 photoURL,
-                displayName
+                displayName,
+                chatroomId
             })
         } catch(err) {
-            setError(err.message)
+            console.log(err.message)
         }
 
         setMsgFormValue('')
@@ -42,8 +46,9 @@ function Chat() {
     }
 
     return(
-        <>
-            <div>{currentUser.displayName}</div>
+        <div className="message-component">
+            {error && <div>{error}</div>}
+            <div className="message-header"><p>header</p></div>
             <div className="message-container">
                 {messages && messages.reverse().map(msg => <ChatMessage key={msg.id} message={msg} />)}
                 <div ref={scrollBottomRef}></div>
@@ -53,8 +58,8 @@ function Chat() {
                 <input className="message-form--input" onKeyPress={(event) => {if(event.keyCode === '13') handleMessage()}} value={msgFormValue} onChange={(e) => setMsgFormValue(e.target.value)} type="text" />
                 <button className="message-form--submit" type="submit">Send</button>
             </form>
-        </>
+        </div>
     )
 }
 
-export default Chat
+export default Chatroom

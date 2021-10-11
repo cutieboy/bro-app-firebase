@@ -1,0 +1,111 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url("https://assets.atlasobscura.com/media/W1siZiIsInVwbG9hZHMvcGxhY2VfaW1hZ2VzLzA0MzRjZGI4MTJlNjdkMzBmNV93aW5kb3dzX3hwX2JsaXNzLXdpZGUuanBnIl0sWyJwIiwidGh1bWIiLCIxMjAweD4iXSxbInAiLCJjb252ZXJ0IiwiLXF1YWxpdHkgODEgLWF1dG8tb3JpZW50Il1d/windows_xp_bliss-wide.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.dashboard {
+  display: flex;
+  flex-direction: row;
+  height: 600px;
+}
+
+.friends-list {
+  background-color: beige;
+  height: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.friend {
+  display: flex;
+  flex-direction: row;
+}
+
+.friend:hover {
+  background-color: #dfdfc3;
+  cursor: pointer;
+}
+
+.friend p {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.message-component {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 10px;
+}
+
+.message-header {
+  flex: 1;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background: blue;
+  color: white;
+  border-radius: 10px 10px 0 0;
+  display: flex;
+  align-items: center;
+}
+
+.message-header p {
+  height: 100%;
+  text-align: center;
+}
+
+.message-container {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  flex: 10;
+  width: 400px;
+  overflow: scroll;
+  background: white;
+  border: 3px solid beige;
+  border-bottom: 10px solid beige;
+  border-top: 10px solid beige;
+}
+
+.message-form {
+  height: 100%;
+  flex: 5;
+}
+
+.message-form--input {
+  width: 350px;
+  height: 100%;
+}
+
+.message-form--submit {
+  width: 50px;
+  height: 100%;
+}
+
+.message {
+  display: flex;
+  width: 100%;
+}
+
+.message-display-name {
+  font-weight: bold;
+}
+
+.message-text {
+  margin-left: 10px;
+}
+
+/* .message-time {
+  margin-left: auto;
+} */
+
+.message-yours {
+  color: blue;
+}
+
+.message-not-yours {
+  color: red;
+}
