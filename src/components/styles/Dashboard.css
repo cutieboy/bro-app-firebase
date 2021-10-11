@@ -1,0 +1,10 @@
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboard-container nav {
+    width: 100vw;
+    background-color: brown;
+    height: 70px;
+}

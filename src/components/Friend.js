@@ -17,8 +17,7 @@ function Friend(props) {
         <div className="friend" onClick={
             () => startChat(user[0].chatId, chatId)
         }>
-            <p>Username: {username}</p>
-            <p>ChatID: {chatId}</p>
+            <p>{username}</p>
         </div>
     )
 }

@@ -46,17 +46,42 @@ function Chatroom(props) {
     }
 
     return(
-        <div className="message-component">
+        <div className="message-component component">
             {error && <div>{error}</div>}
-            <div className="message-header"><p>header</p></div>
+            <div className="message-header">
+                <p>header</p>
+                <div className="box-container">
+                    <span className="box">
+                        <span className="box-minus"></span>
+                    </span>
+                    <span className="box">
+                        <span className="box-square"></span>
+                    </span>
+                    <span className="box">
+                        <span className="box-x box-x-right"></span>
+                        <span className="box-x box-x-left"></span>
+                    </span>
+                </div>
+            </div>
+            <div className="message-sub-header">
+                <p className="message-sub-header-file">File</p>
+                <p className="message-sub-header-edit">Edit</p>
+                <p className="message-sub-header-insert">Insert</p>
+            </div>
+            <span className="message-sub-header-border"></span>
             <div className="message-container">
                 {messages && messages.reverse().map(msg => <ChatMessage key={msg.id} message={msg} />)}
                 <div ref={scrollBottomRef}></div>
             </div>
-
             <form className="message-form" onSubmit={handleMessage} >
                 <input className="message-form--input" onKeyPress={(event) => {if(event.keyCode === '13') handleMessage()}} value={msgFormValue} onChange={(e) => setMsgFormValue(e.target.value)} type="text" />
-                <button className="message-form--submit" type="submit">Send</button>
+                <div className="message-form-btns">
+                    <div className="message-form-btns-1"></div>
+                    <div className="message-form-btns-2"></div>
+                    <div className="message-form-btns-3">
+                        <button className="message-form--submit" type="submit">Send</button>
+                    </div>
+                </div>
             </form>
         </div>
     )

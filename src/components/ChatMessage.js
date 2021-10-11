@@ -3,7 +3,7 @@ import { useAuth } from '../contexts/AuthContext'
 
 function ChatMessage(props) {
     const {currentUser} = useAuth()
-    const { text, uid, createdAt, displayName } = props.message
+    const { text, uid, displayName } = props.message //Add createdAt to destructuring when you want timestamps
 
     return (
         <div className="message">

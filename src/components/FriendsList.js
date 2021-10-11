@@ -13,13 +13,24 @@ function FriendsList(props) {
     const startChat = props.startChat
 
     return (
-        <div className="friends-list">
+        <div className="friends-list component">
+            <div className="friends-list-header">
+                <p>Friends List</p>
+                <div className="box-container">
+                    <div className="box">
+                            <span className="box-x box-x-right"></span>
+                            <span className="box-x box-x-left"></span>
+                    </div>
+                </div>
+            </div>
+            <div className="friends-container">
             {users && users.map((user) => {
                 if(user.username === currentUser.displayName) {
                     return null
                 }
                 return <Friend startChat={startChat} key={user.chatId} username={user.username} chatId={user.chatId} />
             })}
+            </div>
         </div>
     )
 }
