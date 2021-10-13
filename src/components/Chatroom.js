@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { useAuth } from '../contexts/AuthContext'
 import { firestore } from '../firebase'
@@ -20,7 +20,30 @@ function Chatroom(props) {
     //State & Ref hooks
     const [msgFormValue, setMsgFormValue] = useState('')
     const [error, setError] = useState('')
+    const [messagesLoaded, setMessagesLoaded] = useState(false)
     const scrollBottomRef = useRef()
+
+    const audioPath = {
+        messageYours: '../../messageYours.mp3',
+        messageTheirs: '../../messageTheirs.mp3',
+    }
+
+    let messageYoursAudio = new Audio(audioPath.messageYours)
+    let messageTheirsAudio = new Audio(audioPath.messageTheirs)
+
+    useEffect(() => {
+        async function playSound() {
+            if(messages[messages.length - 1].displayName !== currentUser.displayName) {
+                messageTheirsAudio.play()
+            }
+        }
+
+        if(messages && messagesLoaded) {
+            if(messages.length > 0) playSound()
+        }
+
+        return setMessagesLoaded(true)
+    }, [messages])
 
     async function handleMessage(e) {
         e.preventDefault()
@@ -41,6 +64,7 @@ function Chatroom(props) {
             console.log(err.message)
         }
 
+        messageYoursAudio.play()
         setMsgFormValue('')
         scrollBottomRef.current.scrollIntoView({behavior: 'smooth'})
     }
@@ -71,14 +95,12 @@ function Chatroom(props) {
             <span className="message-sub-header-border"></span>
             <div className="message-container">
                 {messages && messages.reverse().map(msg => <ChatMessage key={msg.id} message={msg} />)}
-                <div ref={scrollBottomRef}></div>
+                <div className="message-scroll-bottom" ref={scrollBottomRef}></div>
             </div>
             <form className="message-form" onSubmit={handleMessage} >
-                <input className="message-form--input" onKeyPress={(event) => {if(event.keyCode === '13') handleMessage()}} value={msgFormValue} onChange={(e) => setMsgFormValue(e.target.value)} type="text" />
+                <textarea className="message-form--input" onKeyPress={(event) => {if(event.keyCode === '13') handleMessage()}} value={msgFormValue} onChange={(e) => setMsgFormValue(e.target.value)} type="textarea" />
                 <div className="message-form-btns">
-                    <div className="message-form-btns-1"></div>
-                    <div className="message-form-btns-2"></div>
-                    <div className="message-form-btns-3">
+                    <div className="message-form-btns-1">
                         <button className="message-form--submit" type="submit">Send</button>
                     </div>
                 </div>

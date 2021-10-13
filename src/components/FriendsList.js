@@ -10,6 +10,7 @@ function FriendsList(props) {
     const { currentUser } = useAuth()
     const userDatabase = firestore.collection('users')
     const [users] = useCollectionData(userDatabase)
+    
     const startChat = props.startChat
 
     return (

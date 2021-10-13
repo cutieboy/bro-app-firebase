@@ -30,7 +30,7 @@ function Dashboard() {
     }
 
     function startChat(userOne, userTwo) {
-        if(userOne === undefined || userTwo === undefined) {
+        if(userOne.chatId === undefined || userTwo.chatId === undefined) {
             return console.log("Chat Id Invalid")
         }
 
@@ -38,23 +38,23 @@ function Dashboard() {
         let chatroomExists = false;
 
         chatrooms.forEach((e) => {
-            if(e.userTwo === userOne && e.userOne === userTwo) {
+            if(e.userTwo === userOne.username && e.userOne === userTwo.username) {
                 setChatroomId(e.chatroomId)
                 return chatroomExists = true;
             }
 
-            if(e.userOne === userOne && e.userTwo === userTwo) {
+            if(e.userOne === userOne.username && e.userTwo === userTwo.username) {
                 setChatroomId(e.chatroomId)
                 return chatroomExists = true;
             }
         })
 
-        if(chatroomExists) return console.log('this chatroom exists')
+        if(chatroomExists) return
 
         chatroomDatabase.add({
             chatroomId: newChatroomId,
-            userOne: userOne,
-            userTwo: userTwo
+            userOne: userOne.username,
+            userTwo: userTwo.username,
         })
 
         return setChatroomId(newChatroomId)

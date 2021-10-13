@@ -53,8 +53,12 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgb(25,26,112);
-  background: linear-gradient(90deg, rgba(25,26,112,1) 0%, rgba(190,214,224,1) 100%);
+  background: rgb(25, 26, 112);
+  background: linear-gradient(
+    90deg,
+    rgba(25, 26, 112, 1) 0%,
+    rgba(190, 214, 224, 1) 100%
+  );
   padding-left: 5px;
   height: 25px;
 }
@@ -137,12 +141,16 @@ body {
   flex-direction: column;
   align-items: flex-start;
   margin-left: 10px;
-  background: var(--gray)
+  background: var(--gray);
 }
 
 .message-header {
-  background: rgb(25,26,112);
-  background: linear-gradient(90deg, rgba(25,26,112,1) 0%, rgba(190,214,224,1) 100%);
+  background: rgb(25, 26, 112);
+  background: linear-gradient(
+    90deg,
+    rgba(25, 26, 112, 1) 0%,
+    rgba(190, 214, 224, 1) 100%
+  );
   height: 25px;
   width: 100%;
   display: flex;
@@ -183,7 +191,7 @@ body {
 .message-sub-header-border {
   width: 100%;
   height: 2px;
-  background-color: var(--lightgray)
+  background-color: var(--lightgray);
 }
 
 .message-container {
@@ -197,6 +205,10 @@ body {
   border: 5px solid var(--gray);
   border-bottom: 10px solid var(--gray);
   border-top: 10px solid var(--gray);
+}
+
+.message-scroll-bottom {
+  margin-top: 30px;
 }
 
 .message-form {
@@ -213,6 +225,7 @@ body {
   height: 100%;
   width: 100%;
   border-radius: 0;
+  resize: none;
 }
 
 .message-form-btns {

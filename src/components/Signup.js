@@ -40,7 +40,7 @@ function Signup() {
             await result.user.updateProfile({
                 displayName: usernameRef.current.value
             })
-            await userDatabase.add({
+            await userDatabase.doc(usernameRef.current.value).set({
                 username: usernameRef.current.value,
                 chatId: newChatId,
             })
