@@ -46,6 +46,7 @@ function Chatroom(props) {
     }, [messages])
 
     async function handleMessage(e) {
+        if(e.which !== 13) return
         e.preventDefault()
         if(msgFormValue === '') return
         const {uid, photoURL, displayName} = currentUser
@@ -68,12 +69,12 @@ function Chatroom(props) {
         setMsgFormValue('')
         scrollBottomRef.current.scrollIntoView({behavior: 'smooth'})
     }
-
+    
     return(
         <div className="message-component component">
             {error && <div>{error}</div>}
             <div className="message-header">
-                <p>header</p>
+                <p>ZIM Chat</p>
                 <div className="box-container">
                     <span className="box">
                         <span className="box-minus"></span>
@@ -98,7 +99,7 @@ function Chatroom(props) {
                 <div className="message-scroll-bottom" ref={scrollBottomRef}></div>
             </div>
             <form className="message-form" onSubmit={handleMessage} >
-                <textarea className="message-form--input" onKeyPress={(event) => {if(event.keyCode === '13') handleMessage()}} value={msgFormValue} onChange={(e) => setMsgFormValue(e.target.value)} type="textarea" />
+                <textarea className="message-form--input" onKeyPress={(event) => {handleMessage(event)}} value={msgFormValue} onChange={(e) => setMsgFormValue(e.target.value)} type="textarea" />
                 <div className="message-form-btns">
                     <div className="message-form-btns-1">
                         <button className="message-form--submit" type="submit">Send</button>

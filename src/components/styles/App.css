@@ -87,6 +87,14 @@ body {
   margin: 0;
 }
 
+.friends-search-container {
+  margin: 5px;
+}
+
+.friends-search-container input {
+  width: 185px;
+}
+
 .box-container {
   margin-left: auto;
   margin-right: 3px;
@@ -233,7 +241,6 @@ body {
   margin-top: 3px;
   display: flex;
   flex-direction: row;
-  border: 1px solid black;
 }
 
 .message-form-btns div {
