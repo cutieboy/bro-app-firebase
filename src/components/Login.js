@@ -1,56 +1,57 @@
 import React, { useRef, useState } from 'react'
-import { Form, Button, Card, Alert } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { useAuth } from '../contexts/AuthContext'
 import { Link, useHistory } from 'react-router-dom'
+import { Alert } from 'react-bootstrap'
 
 function Login() {
     const emailRef = useRef()
     const passwordRef = useRef()
     const { login } = useAuth()
-    const [error, setError] = useState('')
-    const [loading, setLoading] = useState(false)
     const history = useHistory()
+    const [error, setError] = useState('')
 
     async function handleSubmit(e) {
         e.preventDefault()
 
         try {
             setError('')
-            setLoading(true)
             await login(emailRef.current.value, passwordRef.current.value)
             history.push("/")
         } catch(err) {
             setError(err.message)
         }
-        setLoading(false)
     }
     
     return (
         <>
-            <Card>
-                <Card.Body>
-                    <h2 className="text-center mb-4">Login</h2>
-                    {error && <Alert variant="danger">{error}</Alert>}
-                    <Form onSubmit={handleSubmit}>
-                        <Form.Group id="email">
-                            <Form.Label>Email</Form.Label>
-                            <Form.Control ref={emailRef} type="email" required />
-                        </Form.Group>
-                        <Form.Group id="password">
-                            <Form.Label>Password</Form.Label>
-                            <Form.Control ref={passwordRef} type="password" required />
-                        </Form.Group>
-                        <Button disable={loading.toString()} className="w-100 mb-4 mt-4" type="submit">Login</Button>
-                        {/* <Button onClick={signInWithGoogle} >Sign in with Google</Button> */}
-                        <div className="w-100 mt-1 mb-1 text-center">
-                            <Link to="forgot-password">Forgot Password?</Link>
-                        </div>
-                    </Form>
-                </Card.Body>
-            </Card>
-            <div className="w-100 text-center mt-2">
-                Don't have an account? <Link to="/signup">Sign Up</Link>
+            {error && <Alert className="alert" variant="danger">{error}</Alert>}
+            <div className="auth-container component">
+                <div className="header">
+                    <p>ZIM Chat</p>
+                    <div className="box-container">
+                        <span className="box">
+                            <span className="box-minus"></span>
+                        </span>
+                        <span className="box">
+                            <span className="box-square"></span>
+                        </span>
+                        <span className="box">
+                                <span className="box-x box-x-right"></span>
+                                <span className="box-x box-x-left"></span>
+                        </span>
+                    </div>
+                </div>
+                <h2>Login</h2>
+                <form onSubmit={handleSubmit}>
+                    <label>Email</label>
+                    <input id="email" ref={emailRef} type="email" required />
+                    <label>Password</label>
+                    <input id="password" ref={passwordRef} type="password" required />
+                    <button>Login</button>
+                </form>
+                <Link to="/forgot-password">Forgot Password?</Link>
+                <div className="login-signup"><p>Don't have an account?</p><Link to="/signup">Sign Up</Link></div>
             </div>
         </>
     )

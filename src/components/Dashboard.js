@@ -1,7 +1,4 @@
 import React, { useState } from 'react'
-import { Button } from 'react-bootstrap'
-import { useAuth } from '../contexts/AuthContext'
-import { useHistory } from 'react-router-dom'
 import { firestore } from '../firebase'
 
 import Chatroom from './Chatroom'
@@ -10,24 +7,10 @@ import { useCollectionData } from 'react-firebase-hooks/firestore'
 
 function Dashboard() {
     //TODO: Add error when ready for error-handling
-    const [error, setError] = useState('')
     const [chatroomId, setChatroomId] = useState('')
 
     const chatroomDatabase = firestore.collection('chatrooms')
     const [chatrooms] = useCollectionData(chatroomDatabase)
-
-    const { logout } = useAuth()
-    const history = useHistory()
-
-    async function handleLogout() {
-        setError('')
-        try {
-            await logout()
-            history.push('./login')
-        } catch(err) {
-            setError(err.message)
-        }
-    }
 
     function startChat(userOne, userTwo) {
         if(userOne.chatId === undefined || userTwo.chatId === undefined) {
@@ -62,10 +45,8 @@ function Dashboard() {
 
     return (
         <div className="dashboard">
-            {error && <div>{error}</div>}
                 <FriendsList startChat={startChat} />
                 {chatroomId && <Chatroom className="chatroom" chatroomId={chatroomId} />}
-                <Button variant="link" onClick={handleLogout}>Log Out</Button>
         </div>
     )
 }

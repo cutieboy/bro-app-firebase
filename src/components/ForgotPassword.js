@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import { Form, Button, Card, Alert } from 'react-bootstrap'
+import { Alert } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { useAuth } from '../contexts/AuthContext'
 import { Link } from 'react-router-dom'
@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom'
 function ForgotPassword() {
     const emailRef = useRef()
     const { forgotPassword } = useAuth()
-    const [error, setError] = useState('')
     const [message, setMessage] = useState('')
     const [loading, setLoading] = useState(false)
 
@@ -15,7 +14,6 @@ function ForgotPassword() {
         e.preventDefault()
         try {
             setMessage('')
-            setError('')
             setMessage(`If the email exists, an email has been sent to ${emailRef.current.value}.`)
             setLoading(true)
             await forgotPassword(emailRef.current.value)
@@ -27,23 +25,31 @@ function ForgotPassword() {
     
     return (
         <>
-            <Card>
-                <Card.Body>
-                    <h2 className="text-center mb-4">Reset Password</h2>
-                    {error && <Alert variant="danger">{error}</Alert>}
-                    {message && <Alert variant="success">{message}</Alert>}
-                    <Form onSubmit={handleForgotPassword}>
-                        <Form.Group id="email">
-                            <Form.Label>Email</Form.Label>
-                            <Form.Control ref={emailRef} type="email" required />
-                        </Form.Group>
-                        <Button disable={loading} className="w-100 mb-4 mt-4" type="submit">Reset Password</Button>
-                        <div className="text-center">
-                            <Link to="/login">Back to Login</Link>
-                        </div>
-                    </Form>
-                </Card.Body>
-            </Card>
+            {message && <Alert className="alert" variant="success">{message}</Alert>}
+            <div className="auth-container component">
+                <div className="header">
+                    <p>ZIM Chat</p>
+                    <div className="box-container">
+                        <span className="box">
+                            <span className="box-minus"></span>
+                        </span>
+                        <span className="box">
+                            <span className="box-square"></span>
+                        </span>
+                        <span className="box">
+                                <span className="box-x box-x-right"></span>
+                                <span className="box-x box-x-left"></span>
+                        </span>
+                    </div>
+                </div>
+                <h2 style={{fontSize: '28px'}}>Forgot Password</h2>
+                <form onSubmit={handleForgotPassword}>
+                    <label>Email</label>
+                    <input id="email" ref={emailRef} type="email" required />
+                    <button disable={loading.toString()} >Reset Password</button>
+                </form>
+                <div className="login-signup"><p>Already have an account?</p><Link to="/login">Back to Login</Link></div>
+            </div>
         </>
     )
 }

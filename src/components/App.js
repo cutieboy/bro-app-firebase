@@ -1,4 +1,3 @@
-import { Container } from 'react-bootstrap'
 import { AuthProvider } from '../contexts/AuthContext'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import PrivateRoute from './PrivateRoute'
@@ -13,7 +12,7 @@ import './styles/App.css'
 
 function App() {
   return (
-      <Container className="app">
+      <div className="app">
         <div style={{height: '100%'}}>
           <Router>
             <AuthProvider>
@@ -28,7 +27,7 @@ function App() {
             </AuthProvider>
           </Router>
         </div>
-      </Container>
+      </div>
     
   );
 }

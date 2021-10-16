@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import { Form, Button, Card, Alert } from 'react-bootstrap'
+import { Alert } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { useAuth } from '../contexts/AuthContext'
 import { firestore } from '../firebase'
@@ -53,33 +53,36 @@ function Signup() {
     
     return (
         <>
-            <Card>
-                <Card.Body>
-                    <h2 className="text-center mb-4">Sign Up</h2>
-                    {error && <Alert variant="danger">{error}</Alert>}
-                    <Form onSubmit={handleSubmit}>
-                        <Form.Group id="username">
-                            <Form.Label>Username</Form.Label>
-                            <Form.Control ref={usernameRef} type="text" required />
-                        </Form.Group>
-                        <Form.Group id="email">
-                            <Form.Label>Email</Form.Label>
-                            <Form.Control ref={emailRef} type="email" required />
-                        </Form.Group>
-                        <Form.Group id="password">
-                            <Form.Label>Password</Form.Label>
-                            <Form.Control ref={passwordRef} type="password" required />
-                        </Form.Group>
-                        <Form.Group id="password-confirmation">
-                            <Form.Label>Password Confirmation</Form.Label>
-                            <Form.Control ref={passwordConfirmRef} type="password" required />
-                        </Form.Group>
-                        <Button disable={loading.toString()} className="w-100 mb-4 mt-4" type="submit">Sign Up</Button>
-                    </Form>
-                </Card.Body>
-            </Card>
-            <div className="w-100 text-center mt-2">
-                Already have an account? <Link to="/login">Log In</Link>
+            {error && <Alert variant="danger">{error}</Alert>}
+            <div className="auth-container signup-container component">
+                <div className="header">
+                    <p>ZIM Chat</p>
+                    <div className="box-container">
+                        <span className="box">
+                            <span className="box-minus"></span>
+                        </span>
+                        <span className="box">
+                            <span className="box-square"></span>
+                        </span>
+                        <span className="box">
+                                <span className="box-x box-x-right"></span>
+                                <span className="box-x box-x-left"></span>
+                        </span>
+                    </div>
+                </div>
+                <h2>Signup</h2>
+                <form onSubmit={handleSubmit}>
+                    <label>Username</label>
+                    <input id="username" ref={usernameRef} type="text" required />
+                    <label>Email</label>
+                    <input id="email" ref={emailRef} type="email" required />
+                    <label>Password</label>
+                    <input id="password" ref={passwordRef} type="password" required />
+                    <label>Confirm Password</label>
+                    <input id="password-confirmation" ref={passwordConfirmRef} type="password" required />
+                    <button disable={loading.toString()}>Sign Up</button>
+                </form>
+                <div className="login-signup"><p>Already have an account?</p><Link to="/login">Log in</Link></div>
             </div>
         </>
     )

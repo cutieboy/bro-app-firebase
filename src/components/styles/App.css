@@ -26,6 +26,51 @@ body {
   max-height: 100vh;
 }
 
+.alert {
+  width: 250px;
+}
+
+.auth-container {
+  display: flex;
+  flex-direction: column;
+  background: var(--gray);
+  height: 400px;
+  width: 250px;
+}
+
+.signup-container {
+  height: 450px;
+}
+
+.auth-container form {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin: 10px;
+}
+
+.auth-container a {
+  text-align: center;
+}
+
+.auth-container h2 {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.login-signup p {
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+
+.auth-container button {
+  margin-top: 20px;
+}
+
+.login-signup {
+  text-align: center;
+}
+
 .dashboard {
   display: flex;
   flex-direction: row;
@@ -49,7 +94,7 @@ body {
   width: 200px;
 }
 
-.friends-list-header {
+.header {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -63,7 +108,7 @@ body {
   height: 25px;
 }
 
-.friends-list-header p {
+.header p {
   color: white;
   margin: 0;
 }
@@ -93,6 +138,10 @@ body {
 
 .friends-search-container input {
   width: 185px;
+}
+
+.friends-logout-btn {
+  margin: 5px;
 }
 
 .box-container {
@@ -285,6 +334,7 @@ body {
 
 .message-text {
   margin-left: 10px;
+  word-break: break-all;
 }
 
 /* .message-time {
