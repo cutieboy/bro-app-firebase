@@ -22,7 +22,8 @@ function Chatroom(props) {
     const [chatrooms] = useCollectionData(chatroomQuery)
 
     //State & Ref hooks
-    const [msgFormValue, setMsgFormValue] = useState('')
+    // const [msgFormValue, setMsgFormValue] = useState('')
+    const msgFormValue = useRef()
     const [error, setError] = useState('')
     const [messagesLoaded, setMessagesLoaded] = useState(false)
     const [chatUser, setChatUser] = useState('')
@@ -71,13 +72,13 @@ function Chatroom(props) {
 
     async function handleMessage(e) {
         e.preventDefault()
-        if(msgFormValue === '') return
+        if(msgFormValue.current.value === '') return
         const {uid, photoURL, displayName} = currentUser
 
         try {
             setError('')
             messageDatabase.add({
-                text: msgFormValue,
+                text: msgFormValue.current.value,
                 createdAt: firebase.firestore.FieldValue.serverTimestamp(),
                 uid,
                 photoURL,
@@ -89,7 +90,7 @@ function Chatroom(props) {
         }
 
         messageYoursAudio.play()
-        setMsgFormValue('')
+        msgFormValue.current.value = ''
         scrollBottomRef.current.scrollIntoView({behavior: 'smooth'})
     }
     
@@ -122,7 +123,7 @@ function Chatroom(props) {
                 <div className="message-scroll-bottom" ref={scrollBottomRef}></div>
             </div>
             <form className="message-form" onSubmit={handleMessage} >
-                <textarea className="message-form--input" onKeyPress={(event) => {if(event.which === 13) handleMessage(event)}} value={msgFormValue} onChange={(e) => setMsgFormValue(e.target.value)} type="textarea" />
+                <textarea className="message-form--input" onKeyPress={(event) => {if(event.which === 13) handleMessage(event)}} ref={msgFormValue} type="textarea" />
                 <div className="message-form-btns">
                     <div className="message-form-btns-1">
                         <button className="message-form--submit" type="submit">Send</button>
