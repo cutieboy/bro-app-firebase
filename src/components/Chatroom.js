@@ -14,7 +14,7 @@ function Chatroom(props) {
 
     //Messages collection - firestore
     const messageDatabase = firestore.collection('messages')
-    const messageQuery = messageDatabase.orderBy("createdAt", "desc").where("chatroomId", "==", chatroomId)
+    const messageQuery = messageDatabase.orderBy("createdAt", "asc").where("chatroomId", "==", chatroomId)
     const [messages] = useCollectionData(messageQuery, {idField: 'id'})
 
     const chatroomDatabase = firestore.collection('chatrooms')
@@ -22,7 +22,6 @@ function Chatroom(props) {
     const [chatrooms] = useCollectionData(chatroomQuery)
 
     //State & Ref hooks
-    // const [msgFormValue, setMsgFormValue] = useState('')
     const msgFormValue = useRef()
     const [error, setError] = useState('')
     const [messagesLoaded, setMessagesLoaded] = useState(false)
@@ -119,7 +118,7 @@ function Chatroom(props) {
             </div>
             <span className="message-sub-header-border"></span>
             <div className="message-container">
-                {messages && messages.reverse().map(msg => <ChatMessage key={msg.id} message={msg} />)}
+                {messages && messages.map(msg => <ChatMessage key={msg.id} message={msg} />)}
                 <div className="message-scroll-bottom" ref={scrollBottomRef}></div>
             </div>
             <form className="message-form" onSubmit={handleMessage} >
