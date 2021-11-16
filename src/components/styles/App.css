@@ -119,6 +119,8 @@ body {
   margin: 5px;
   display: flex;
   flex-direction: column;
+  overflow: scroll;
+  overflow-x: hidden;
 }
 
 .friend:hover {
