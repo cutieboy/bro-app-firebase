@@ -6,4 +6,4 @@ ZIM Chat is an AOL instant messenger clone using websockets to render real-time 
 
 • React\
 • React Context API\
-• Firebase\
+• Firebase
